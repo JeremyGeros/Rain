@@ -6,7 +6,7 @@ import com.jeremygeros.level.tile.Tile;
 
 public class Screen {
 	
-	private int width, height;
+	public int width, height;
 	public int[] pixels;
 	
 	public final int MAP_SIZE = 16;
