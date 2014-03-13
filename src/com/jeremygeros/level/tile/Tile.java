@@ -10,6 +10,7 @@ public class Tile {
 	
 	public static Tile grass = new GrassTile(Sprite.grass);
 	
+	
 	public Tile(Sprite sprite) {
 		this.sprite = sprite;
 	}
