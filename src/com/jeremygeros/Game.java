@@ -9,6 +9,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.jeremygeros.Entity.Mob.Player;
 import com.jeremygeros.graphics.Screen;
 import com.jeremygeros.level.Level;
 import com.jeremygeros.level.RandomLevel;
@@ -29,6 +30,7 @@ public class Game extends Canvas implements Runnable {
 	private Keyboard key;
 	private Level level;
 	private Screen screen;
+	private Player player;
 	
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -41,6 +43,7 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		level = new RandomLevel(64, 64);
+		player = new Player(key);
 		
 		addKeyListener(key);
 	}
@@ -95,14 +98,9 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 	
-	int x = 0, y = 0;
-	
 	public void update() {		
 		key.update();
-		if (key.up) y+= 2;
-		if (key.down) y-= 2;
-		if (key.left) x+= 2;
-		if (key.right) x-=2;
+		player.update();
 	}
 	
 	public void render() {
@@ -113,7 +111,11 @@ public class Game extends Canvas implements Runnable {
 		}
 		
 		screen.clear();
-		level.render(x, y, screen);
+		int xScroll = player.x - screen.width / 2;
+		int yScroll = player.y - screen.height / 2;
+		
+		level.render(xScroll, yScroll, screen);
+		player.render(screen);
 		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
