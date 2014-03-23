@@ -11,14 +11,14 @@ public class Player extends Mob {
 	
 	public Player(Keyboard input) {
 		this.input = input;
-		sprite = sprite.player_forward;
+		sprite = sprite.player_back;
 	}
 	
 	public Player(Keyboard input, int x, int y) {
 		this.input = input;
 		this.x = x;
 		this.y = y;
-		sprite = sprite.player_forward;
+		sprite = sprite.player_back;
 	}
 	
 	public void update() {
@@ -32,9 +32,9 @@ public class Player extends Mob {
 	}
 	
 	public void render(Screen screen) {
-		if (dir == 0) sprite = Sprite.player_forward;
+		if (dir == 0) sprite = Sprite.player_back;
 		if (dir == 1) sprite = Sprite.player_right;
-		if (dir == 2) sprite = Sprite.player_back;
+		if (dir == 2) sprite = Sprite.player_forward;
 		if (dir == 3) sprite = Sprite.player_left;
 		
 		screen.renderPlayer(x - 16, y - 16, sprite);
