@@ -7,15 +7,18 @@ import com.jeremygeros.graphics.Sprite;
 public class Player extends Mob {
 	
 	private Keyboard input;
+	private Sprite sprite;
 	
 	public Player(Keyboard input) {
 		this.input = input;
+		sprite = sprite.player_forward;
 	}
 	
 	public Player(Keyboard input, int x, int y) {
 		this.input = input;
 		this.x = x;
 		this.y = y;
+		sprite = sprite.player_forward;
 	}
 	
 	public void update() {
@@ -29,12 +32,11 @@ public class Player extends Mob {
 	}
 	
 	public void render(Screen screen) {
-		int xx = x - 16;
-		int yy = y - 16;
+		if (dir == 0) sprite = Sprite.player_forward;
+		if (dir == 1) sprite = Sprite.player_right;
+		if (dir == 2) sprite = Sprite.player_back;
+		if (dir == 3) sprite = Sprite.player_left;
 		
-		screen.renderPlayer(xx, yy, Sprite.player0);
-		screen.renderPlayer(xx+16, yy, Sprite.player1);
-		screen.renderPlayer(xx, yy+16, Sprite.player2);
-		screen.renderPlayer(xx+16, yy+16, Sprite.player3);
+		screen.renderPlayer(x - 16, y - 16, sprite);
 	}
 }
